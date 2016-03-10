@@ -60,6 +60,16 @@ namespace ShoeStore
       Assert.Equal(testId, result);
     }
 
+    [Fact]
+    public void Test_Find_FindsBrandInDatabase()
+    {
+      Brand testBrand = new Brand("Nike");
+      testBrand.Save();
+
+      Brand foundBrand = Brand.Find(testBrand.GetId());
+
+      Assert.Equal(testBrand, foundBrand);
+    }
 
     public void Dispose()
     {
