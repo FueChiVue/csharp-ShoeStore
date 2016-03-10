@@ -33,9 +33,37 @@ namespace ShoeStore
       //Assert
       Assert.Equal(firstStore, secondStore);
     }
+
+    [Fact]
+    public void Test_Save()
+    {
+      Store testStore = new Store("FootLocker");
+      testStore.Save();
+
+      List<Store> result = Store.GetAll();
+      List<Store> testList = new List<Store> {testStore};
+
+      Assert.Equal(testList, result);
+    }
+
+    [Fact]
+    public void Test_Save_AssignsIdToObject()
+    {
+      Store testStore = new Store("FootLocker");
+      testStore.Save();
+
+      Store savedStore = Store.GetAll()[0];
+
+      int resultId = savedStore.GetId();
+      int testId = testStore.GetId();
+
+      Assert.Equal(testId, resultId);
+    }
+
     public void Dispose()
     {
       Store.DeleteAll();
+      Brand.DeleteAll(); 
     }
   }
 }

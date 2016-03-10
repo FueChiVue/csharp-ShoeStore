@@ -45,10 +45,7 @@ namespace ShoeStore
     [Fact]
     public void Test_Save_AssignsIdToObject()
     {
-      //Arrange
       Brand testBrand = new Brand("Nike");
-
-      //Act
       testBrand.Save();
 
       Brand savedBrand = Brand.GetAll()[0];
@@ -159,6 +156,7 @@ namespace ShoeStore
     public void Dispose()
     {
       Brand.DeleteAll();
+      Store.DeleteAll();
     }
   }
 }
