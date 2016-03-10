@@ -84,7 +84,7 @@ namespace ShoeStore
       testStore2.Save();
 
       testBrand.AddStore(testStore1);
-      testBrand.AddStore(testStore2);  
+      testBrand.AddStore(testStore2);
 
       List<Store> result = testBrand.GetStores();
       List<Store> testList = new List<Store> {testStore1, testStore2};
@@ -109,6 +109,20 @@ namespace ShoeStore
       List<Store> testList = new List<Store> {testStore1};
 
       Assert.Equal(testList, savedList);
+    }
+
+    [Fact]
+    public void Test_Update_UpdateBrandInDatabase()
+    {
+      Brand testBrand = new Brand("Adidas");
+      testBrand.Save();
+
+      string newName = "Nike";
+      testBrand.Update(newName);
+
+      string result = testBrand.GetName();
+
+      Assert.Equal(newName, result); 
     }
 
     public void Dispose()
