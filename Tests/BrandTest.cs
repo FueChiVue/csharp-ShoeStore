@@ -71,6 +71,46 @@ namespace ShoeStore
       Assert.Equal(testBrand, foundBrand);
     }
 
+    [Fact]
+    public void Test_AddStore_AddsStoreToBrand()
+    {
+      Brand testBrand = new Brand("Nike");
+      testBrand.Save();
+
+      Store testStore1 = new Store("FootLocker");
+      testStore1.Save();
+
+      Store testStore2 = new Store("Amazon");
+      testStore2.Save();
+
+      testBrand.AddStore(testStore1);
+      testBrand.AddStore(testStore2);  
+
+      List<Store> result = testBrand.GetStores();
+      List<Store> testList = new List<Store> {testStore1, testStore2};
+
+      Assert.Equal(testList, result);
+    }
+
+    [Fact]
+    public void Test_GetStores_ReturnsAllBrandStores()
+    {
+      Brand testBrand = new Brand("Nike");
+      testBrand.Save();
+
+      Store testStore1 = new Store("FootLocker");
+      testStore1.Save();
+
+      Store testStore2 = new Store("Amazon");
+      testStore2.Save();
+
+      testBrand.AddStore(testStore1);
+      List<Store> savedList = testBrand.GetStores();
+      List<Store> testList = new List<Store> {testStore1};
+
+      Assert.Equal(testList, savedList);
+    }
+
     public void Dispose()
     {
       Brand.DeleteAll();
