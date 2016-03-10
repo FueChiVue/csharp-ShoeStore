@@ -138,20 +138,23 @@ namespace ShoeStore
       Assert.Equal(testList, resultBrands);
     }
 
-    // [Fact]
-    // public void Test_Delete_DeleteBrandAssociationFromDatabase()
-    // {
-    //   Store testStore = new Store("FootLocker");
-    //   testStore.Save();
-    //
-    //   Brand testBrand = new Brand("Nike");
-    //   testBrand.Save();
-    //
-    //   testBrand.AddStore(testStore);
-    //   testBrand.Delete();
-    //
-    //   List<Brand> resultBrands = testStore
-    // }
+    [Fact]
+    public void Test_Delete_DeleteBrandAssociationFromDatabase()
+    {
+      Brand testBrand = new Brand("Nike");
+      testBrand.Save();
+
+      Store testStore = new Store("FootLocker");
+      testStore.Save();
+
+      testBrand.AddStore(testStore);
+      testBrand.Delete();
+
+      List<Brand> resultStoreBrands = testStore.GetBrands();
+      List<Brand> testStoreBrands = new List<Brand> {};
+
+      Assert.Equal(testStoreBrands, resultStoreBrands);
+    }
 
     public void Dispose()
     {

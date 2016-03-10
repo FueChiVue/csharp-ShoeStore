@@ -141,6 +141,24 @@ namespace ShoeStore
       Assert.Equal(testList, resultStores);
     }
 
+    [Fact]
+    public void Test_Delete_DeleteStoreAssociationFromDatabase()
+    {
+      Store testStore = new Store("Amazon");
+      testStore.Save();
+
+      Brand testBrand = new Brand("Adidas");
+      testBrand.Save();
+
+      testStore.AddBrand(testBrand);
+      testStore.Delete();
+
+      List<Store> resultBrandStores = testBrand.GetStores();
+      List<Store> testBrandStores = new List<Store> {};
+
+      Assert.Equal(testBrandStores, resultBrandStores); 
+    }
+
     public void Dispose()
     {
       Store.DeleteAll();
