@@ -60,10 +60,21 @@ namespace ShoeStore
       Assert.Equal(testId, resultId);
     }
 
+    [Fact]
+    public void Test_Find_FindsStoreInDatabase()
+    {
+      Store testStore = new Store("FootLocker");
+      testStore.Save();
+
+      Store foundStore = Store.Find(testStore.GetId());
+
+      Assert.Equal(testStore, foundStore); 
+    }
+
     public void Dispose()
     {
       Store.DeleteAll();
-      Brand.DeleteAll(); 
+      Brand.DeleteAll();
     }
   }
 }
