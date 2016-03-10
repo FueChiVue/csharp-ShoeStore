@@ -122,7 +122,23 @@ namespace ShoeStore
 
       string result = testStore.GetName();
 
-      Assert.Equal(newName, result); 
+      Assert.Equal(newName, result);
+    }
+
+    [Fact]
+    public void Test_Delete_DeletesStoreFromDatabase()
+    {
+      Store testStore1 = new Store("FootLocker");
+      testStore1.Save();
+
+      Store testStore2 = new Store("Amazon");
+      testStore2.Save();
+
+      testStore1.Delete();
+      List<Store> resultStores = Store.GetAll();
+      List<Store> testList = new List<Store> {testStore2};
+
+      Assert.Equal(testList, resultStores);
     }
 
     public void Dispose()
