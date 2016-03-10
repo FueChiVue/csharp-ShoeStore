@@ -23,7 +23,29 @@ namespace ShoeStore
       Get["/stores"] = _ =>
       {
         List<Store> allStores = Store.GetAll();
-        return View["stores.cshtml", allStores]; 
+        return View["stores.cshtml", allStores];
+      };
+
+      Get["/brand/new"] = _ =>
+      {
+        return View["brand_form.cshtml"];
+      };
+      Post["/brand/new"] = _ =>
+      {
+        Brand newBrand = new Brand(Request.Form["brand-name"]);
+        newBrand.Save();
+        return View["success.cshtml"];
+      };
+
+      Get["/store/new"] = _ =>
+      {
+        return View["store_form.cshtml"];
+      };
+      Post["/store/new"] = _ =>
+      {
+        Store newStore = new Store(Request.Form["store-name"]);
+        newStore.Save();
+        return View["success.cshtml"]; 
       };
     }
   }
