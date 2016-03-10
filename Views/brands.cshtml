@@ -12,7 +12,7 @@
     <ul>
       @foreach(var brand in Model)
       {
-        <li><a href="/brands/@brand.GetId()">@brand.GetName()</a> | <a href="/brand/edit/@brand.GetId()">Edit</a> | <a href="/brand/delete/@brand.GetId()">Delete</a></li>
+        <li><a href="/brand/@brand.GetId()">@brand.GetName()</a> | <a href="/brand/edit/@brand.GetId()">Edit</a> | <a href="/brand/delete/@brand.GetId()">Delete</a></li>
       }
     </ul>
     <form action="/brands/delete/all" method="post">
