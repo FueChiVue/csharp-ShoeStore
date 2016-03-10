@@ -110,6 +110,30 @@ namespace ShoeStore
         return View["success.cshtml"];
       };
 
+      Get["/brand/delete/{id}"] = parameters =>
+      {
+        Brand selectedBrand = Brand.Find(parameters.id);
+        return View["brand_delete.cshtml", selectedBrand];
+      };
+      Delete["/brand/delete/{id}"] = parameters =>
+      {
+        Brand selectedBrand = Brand.Find(parameters.id);
+        selectedBrand.Delete();
+        return View["success.cshtml"];
+      };
+
+      Get["/store/delete/{id}"] = parameters =>
+      {
+        Store selectedStore = Store.Find(parameters.id);
+        return View["store_delete.cshtml", selectedStore];
+      };
+      Delete["/store/delete/{id}"] = parameters =>
+      {
+        Store selectedStore = Store.Find(parameters.id);
+        selectedStore.Delete();
+        return View["success.cshtml"];
+      };
+
       Post["/brands/delete/all"] = _ =>
       {
         Brand.DeleteAll();
