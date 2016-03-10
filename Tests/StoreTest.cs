@@ -111,6 +111,20 @@ namespace ShoeStore
       Assert.Equal(testList, savedList);
     }
 
+    [Fact]
+    public void Test_Update_UpdatesStoreInDatabase()
+    {
+      Store testStore = new Store("Amazon");
+      testStore.Save();
+
+      string newName = "FootLocker";
+      testStore.Update(newName);
+
+      string result = testStore.GetName();
+
+      Assert.Equal(newName, result); 
+    }
+
     public void Dispose()
     {
       Store.DeleteAll();
