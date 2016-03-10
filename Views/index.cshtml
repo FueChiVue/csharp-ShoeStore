@@ -1,6 +1,10 @@
-
-<body>
-  <h1> Welcome to Shoe Store</h1>
-  <a href="/brands"><button>View all Brands</button></a>
-  <a href="/stores"><button>View all Stores</button></a>
+@Html.Partial("header.cshtml")
+<body id="mainBody">
+  <div class="container">
+    <div class="jumbotron main">
+      <h1> Welcome to Shoe Store</h1>
+      <a href="/brands"><button class="btn btn-info">View all Brands</button></a>
+      <a href="/stores"><button class="btn btn-success">View all Stores</button></a>
+    </div>
+  </div>
 </body>

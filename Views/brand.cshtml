@@ -1,39 +1,42 @@
-
+@Html.Partial("header.cshtml")
 <body>
-  <h1>Shoe Store</h1>
-  <hr />
+  <div class="container">
+    <div class="jumbotron">
+    <h1>Shoe Store</h1>
+    </div>
+    <div class="container">
+      <h2>Here are all of the stores that carries this brand:</h2>
 
-  <h2>Here are all of the stores that carries this brand:</h2>
-
-  @if(@Model["brandStores"].Count == 0)
-  {
-    <p>There are no store that carries this brand</p>
-  }
-  else
-  {
-    <h2>Brand: @Model["brand"].GetName()</h2>
-    <ol>
-      @foreach(var store in @Model["brandStores"])
+      @if(@Model["brandStores"].Count == 0)
       {
-        <li>@store.GetName()</li>
+        <h4>There are no store that carries this brand</h4>
       }
-    </ol>
-  }
-
-  <h4>Add a new store to this brand:</h4>
-  <hr />
-
-  <form action="/brand/add_store" method="post">
-    <input id="brand-id" name="brand-id" type="hidden" value='@Model["brand"].GetId()'>
-    <label for="store-id">Select Store</label>
-    <select id="store-id" name="store-id" type="text">
-      @foreach(var store in @Model["allStores"])
+      else
       {
-        <option value="@store.GetId()">@store.GetName()</option>
+        <h2>Brand: @Model["brand"].GetName()</h2>
+        <ol>
+          @foreach(var store in @Model["brandStores"])
+          {
+            <li>@store.GetName()</li>
+          }
+        </ol>
       }
-    </select>
-    <button type="submit">Add</button>
-  </form>
-
-  <h4><a href="/">Back to main page</a></h4>
+      <hr />
+      <h4>Add a new store to this brand:</h4>
+      <br>
+      <form action="/brand/add_store" method="post">
+        <input id="brand-id" name="brand-id" type="hidden" value='@Model["brand"].GetId()'>
+        <label for="store-id">Select Store</label>
+        <select id="store-id" name="store-id" type="text">
+          @foreach(var store in @Model["allStores"])
+          {
+            <option value="@store.GetId()">@store.GetName()</option>
+          }
+        </select>
+        <button class="btn btn-info" type="submit">Add</button>
+      </form>
+      <br>
+      <h4><a href="/">Back to main page</a></h4>
+    </div>
+  </div>
 </body>

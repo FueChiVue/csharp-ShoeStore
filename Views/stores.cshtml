@@ -1,25 +1,29 @@
-
+@Html.Partial("header.cshtml")
 <body>
-  <h1>Stores:</h2>
-  <hr />
-
-  @if(@Model.Count == 0)
-  {
-    <p>There are no Stores.</p>
-  }
-  else
-  {
-    <ul>
-      @foreach(var store in Model)
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Stores:</h2>
+    </div>
+    <div class="container">
+      @if(@Model.Count == 0)
       {
-        <li><a href="/store/@store.GetId()">@store.GetName()</a> | <a href="/store/edit/@store.GetId()">Edit</a> | <a href="/store/delete/@store.GetId()">Delete</a></li>
+        <h4>There are no Stores.</h4>
       }
-    </ul>
-    <form action="/stores/delete/all" method="post">
-      <button type="submit">Clear all stores</button>
-    </form>
-  }
+      else
+      {
+        <ul>
+          @foreach(var store in Model)
+          {
+            <li><a href="/store/@store.GetId()">@store.GetName()</a> | <a href="/store/edit/@store.GetId()">Edit</a> | <a href="/store/delete/@store.GetId()">Delete</a></li>
+          }
+        </ul>
+        <form action="/stores/delete/all" method="post">
+          <button class="btn btn-success" type="submit">Clear all stores</button>
+        </form>
+      }
 
-  <h4><a href="/store/new">Add new Store</a></h4>
-  <h4><a href="/">Back to main page</a></h4>
+      <h4><a href="/store/new">Add new Store</a></h4>
+      <h4><a href="/">Back to main page</a></h4>
+    </div>
+  </div>
 </body>

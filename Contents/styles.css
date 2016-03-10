@@ -1,0 +1,29 @@
+.jumbotron {
+  text-align: center;
+  box-shadow: 10px 10px 5px #888888;
+  margin-bottom: 100px;
+}
+
+#mainBody {
+  background: url("main.jpeg") no-repeat 50% 50% fixed;
+  background-size: cover;
+}
+
+.main {
+  margin-top: 50%;
+  background: rgba(248, 248, 245, 0.5);
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+li {
+  font-size: 17px;
+  font-weight: bold;
+}
+label {
+  font-size: 17px;
+  font-weight: bold;
+}
