@@ -135,6 +135,65 @@ namespace ShoeStore
       return foundStore;
     }
 
+    public void AddBrand(Brand newBrand)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO brands_stores (brand_id, store_id) VALUES (@BrandId, @StoreId);", conn);
+
+      SqlParameter brandIdParameter = new SqlParameter();
+      brandIdParameter.ParameterName = "@BrandId";
+      brandIdParameter.Value = newBrand.GetId();
+      cmd.Parameters.Add(brandIdParameter);
+
+      SqlParameter storeIdParameter = new SqlParameter();
+      storeIdParameter.ParameterName = "@StoreId";
+      storeIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(storeIdParameter);
+
+      cmd.ExecuteNonQuery();
+
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public List<Brand> GetBrands()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT brands. * FROM stores JOIN brands_stores ON (stores.id = brands_stores.store_id) JOIN brands ON (brands_stores.brand_id = brands.id) WHERE stores.id = @StoreId;", conn);
+      SqlParameter storeIdParameter = new SqlParameter();
+      storeIdParameter.ParameterName = "@StoreId";
+      storeIdParameter.Value = this.GetId().ToString();
+      cmd.Parameters.Add(storeIdParameter);
+
+      rdr = cmd.ExecuteReader();
+
+      List<Brand> brands = new List<Brand> {};
+      while(rdr.Read())
+      {
+        int brandId = rdr.GetInt32(0);
+        string brandName = rdr.GetString(1);
+        Brand newBrand = new Brand(brandName, brandId);
+        brands.Add(newBrand);
+      }
+
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+      return brands;
+    }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
