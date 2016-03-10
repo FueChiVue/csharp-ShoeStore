@@ -85,6 +85,41 @@ namespace ShoeStore
         store.AddBrand(brand);
         return View["success.cshtml"];
       };
+
+      Get["/brand/edit/{id}"] = parameters =>
+      {
+        Brand selectedBrand = Brand.Find(parameters.id);
+        return View["brand_edit.cshtml", selectedBrand];
+      };
+      Patch["/brand/edit/{id}"]= parameters =>
+      {
+        Brand selectedBrand = Brand.Find(parameters.id);
+        selectedBrand.Update(Request.Form["brand-name"]);
+        return View["success.cshtml"];
+      };
+
+      Get["/store/edit/{id}"] = parameters =>
+      {
+        Store selectedStore = Store.Find(parameters.id);
+        return View["store_edit.cshtml", selectedStore];
+      };
+      Patch["/store/edit/{id}"]= parameters =>
+      {
+        Store selectedStore = Store.Find(parameters.id);
+        selectedStore.Update(Request.Form["store-name"]);
+        return View["success.cshtml"];
+      };
+
+      Post["/brands/delete/all"] = _ =>
+      {
+        Brand.DeleteAll();
+        return View["cleared.cshtml"];
+      };
+      Post["/stores/delete/all"] = _ =>
+      {
+        Store.DeleteAll();
+        return View["cleared.cshtml"];
+      };
     }
   }
 }
